@@ -33,7 +33,7 @@ func main() {
 		port = "8080"
 	}
 
-	dbURL := os.Getenv("DB_URL")
+	dbURL := database.BuildDSN()
 
 	database.RunMigrations(dbURL)
 
