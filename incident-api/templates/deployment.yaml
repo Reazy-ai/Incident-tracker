@@ -44,8 +44,14 @@ spec:
               containerPort: {{ .Values.container.port }}
               protocol: TCP
           envFrom:
-            - secretRef:
-                name: incident-api-secret
+            - configMapRef:
+                name: {{ include "incident-api.fullname" . }}-config
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.secrets.dbPasswordSecretName }}
+                  key: {{ .Values.secrets.dbPasswordSecretKey }}
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
