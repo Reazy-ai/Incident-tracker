@@ -1,2 +1,8 @@
 .env
 .env.*
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform*
+tfplan
+tfdes
